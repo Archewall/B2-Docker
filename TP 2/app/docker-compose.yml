@@ -1,0 +1,22 @@
+version: '3'
+
+services:
+  web:
+    build : .
+    environment:
+        DB_HOST : db
+        PORT : "80"
+    ports:
+        - "80:80"
+
+  db:
+    image: mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: "meow"
+    volumes:
+      - './seed.sql:/docker-entrypoint-inutdb.d/seed.sql'
+
+  phpmyadmin:
+    image: phpmyadmin
+    ports:
+      - "8080:80"
